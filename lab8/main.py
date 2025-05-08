@@ -1,3 +1,8 @@
+# Develop user profiles using different learning methods
+# and compare their performance.
+
+
+
 import pandas as pd
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
