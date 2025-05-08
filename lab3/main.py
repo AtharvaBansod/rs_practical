@@ -1,3 +1,8 @@
+# Perform data preprocessing for a recommender system
+# dataset.
+
+
+
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler
 
