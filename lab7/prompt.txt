@@ -1,1 +1,79 @@
-# This is prompt.txt for lab7
+
+Analyze the impact of item representation methods on
+recommendation quality.
+
+sample code:
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.metrics import classification_report
+
+# Load dataset
+data = pd.read_csv("Item_Interactions.csv")
+
+# Collaborative Filtering Representation
+collaborative_rep = data.pivot_table(index='user_id', columns='item_id', values='interaction').fillna(0)
+collaborative_sim = cosine_similarity(collaborative_rep.T)
+
+# Handling missing descriptions before vectorizing
+if "description" in data.columns:
+    data["description"] = data["description"].fillna("")
+else:
+    data["description"] = [""] * len(data)  # Create empty descriptions if missing
+
+# Content-Based Filtering Representation
+content_vectorizer = TfidfVectorizer(stop_words="english")
+content_matrix = content_vectorizer.fit_transform(data["description"])
+content_sim = cosine_similarity(content_matrix)
+
+# Ensure the similarity matrices have the same shape
+if collaborative_sim.shape == content_sim.shape:
+    hybrid_sim = 0.5 * collaborative_sim + 0.5 * content_sim
+else:
+    hybrid_sim = collaborative_sim  # Fallback if shapes mismatch
+
+# Function to get recommendations
+def get_recommendations(similarity_matrix, item_id, top_n=5):
+    if item_id not in data['item_id'].values:
+        return ["Item not found!"]
+    
+    # Get index of the item
+    idx = data.index[data['item_id'] == item_id].tolist()[0]
+    
+    # Get similarity scores and sort
+    sim_scores = list(enumerate(similarity_matrix[idx]))
+    sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+    
+    # Get top N similar items (excluding the item itself)
+    item_indices = [i[0] for i in sim_scores[1:top_n+1]]
+    
+    return data['item_id'].iloc[item_indices].tolist()
+
+# Evaluate Recommendation Quality
+def evaluate_recommendations(sim_matrix, top_n=5):
+    recommended_items = []
+    actual_items = []
+
+    for item_id in data['item_id'].unique():
+        recommended = get_recommendations(sim_matrix, item_id, top_n)
+        recommended_items.extend(recommended)
+        actual_items.extend([item_id] * len(recommended))
+    
+    # Create binary labels (liked = 1, not liked = 0)
+    actual_labels = [1 if actual in recommended_items else 0 for actual in actual_items]
+    predicted_labels = [1 if actual in recommended_items else 0 for actual in recommended_items]
+
+    # Evaluate using classification metrics
+    report = classification_report(actual_labels, predicted_labels, output_dict=True)
+    return report
+
+# Evaluating Hybrid Representation
+hybrid_report = evaluate_recommendations(hybrid_sim)
+print("Hybrid Representation Evaluation:")
+print(hybrid_report)
+
+
+dont add anything, keep it simple and small, proper working (use normalization if necessary)
+item_interaction.csv sample:
+user_id,item_id,rating,interaction,timestamp,description,item_features
+user_78,item_17,4.0,cart,2025-05-09 04:31:25,Run turn church ahead heavy two produce miss cup decade.,Electronics no
