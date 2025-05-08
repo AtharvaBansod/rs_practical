@@ -1,1 +1,13 @@
-Output:\n
+Output:
+
+Recommended movies based on 'Avatar':
+1. Lifeforce (Score: 0.196)
+2. Moonraker (Score: 0.190)
+3. Gattaca (Score: 0.182)
+4. Trekkies (Score: 0.166)
+5. Apollo 18 (Score: 0.156)
+6. The Inhabited Island (Score: 0.156)
+7. Cargo (Score: 0.154)
+8. Gravity (Score: 0.149)
+9. Lockout (Score: 0.145)
+10. Space Pirate Captain Harlock (Score: 0.144)
