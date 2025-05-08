@@ -1,1 +1,31 @@
-Output:\n
+Output:
+Loading dataset...
+Loaded 2000 records
+
+--- Building User Profiles ---
+Creating collaborative filtering profile...
+Collaborative profile shape: (100, 50)
+
+Creating content-based profile...     
+Content-based profile shape: (100, 10)
+
+Creating hybrid profile...
+Hybrid profile shape: (100, 60)    
+
+--- Evaluating Profiles ---        
+Evaluating collaborative profile...
+Evaluating content-based profile...
+Evaluating hybrid profile...
+
+--- RESULTS ---
+Collaborative Filtering RMSE: 65.2257
+Content-Based RMSE: 0.7935
+Hybrid RMSE: 65.9460
+
+--- CONCLUSION ---
+The best approach for this dataset is: Content-Based with RMSE = 0.7935
+
+All approaches ranked:
+1. Content-Based: RMSE = 0.7935
+2. Collaborative Filtering: RMSE = 65.2257
+3. Hybrid: RMSE = 65.9460

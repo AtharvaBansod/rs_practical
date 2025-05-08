@@ -1,1 +1,102 @@
-# This is prompt.txt for lab8
+Develop user profiles using different learning methods
+and compare their performance.
+
+
+sample code: 
+# Experiment No.: 8
+# Program Code (User Profile Development and Comparison)
+
+import pandas as pd
+from sklearn.decomposition import PCA
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics import mean_squared_error
+
+# Load dataset
+data = pd.read_csv("item_interactions.csv")  # Ensure columns: 'user_id', 'item_id', 'rating', 'item_features'
+
+# Collaborative Filtering – Building User Profiles (Averaging ratings per user)
+collaborative_profile = data.pivot_table(index='user_id', columns='item_id', values='rating').fillna(0)
+
+# Content-Based Learning – Building User Profiles
+if 'item_features' in data.columns:
+    content_features = data.groupby('user_id')['item_features'].apply(lambda x: ' '.join(x)).reset_index()
+    content_vectorizer = TfidfVectorizer(stop_words='english')
+    content_matrix = content_vectorizer.fit_transform(content_features['item_features'])
+    content_profile = pd.DataFrame(content_matrix.toarray(), columns=content_vectorizer.get_feature_names_out())
+else:
+    print("Warning: 'item_features' column not found. Content-based filtering is skipped.")
+    content_profile = pd.DataFrame()
+
+# Hybrid User Profiles (Collaborative + Content-Based)
+hybrid_profile = pd.concat([collaborative_profile.reset_index(drop=True), content_profile], axis=1)
+
+# Dimensionality Reduction using PCA
+pca = PCA(n_components=10)
+reduced_collaborative = pca.fit_transform(collaborative_profile)
+reduced_hybrid = pca.fit_transform(hybrid_profile)
+
+# Function to evaluate user profiles
+def evaluate_profiles(actual_ratings, predicted_ratings):
+    rmse = mean_squared_error(actual_ratings, predicted_ratings, squared=False)
+    return rmse
+
+# Creating predicted ratings using PCA-transformed profiles
+predicted_ratings_collaborative = reduced_collaborative @ reduced_collaborative.T
+predicted_ratings_hybrid = reduced_hybrid @ reduced_hybrid.T
+
+# Experiment No.: 8
+# Program Code (User Profile Development and Comparison)
+
+import pandas as pd
+from sklearn.decomposition import PCA
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics import mean_squared_error
+
+# Load dataset
+data = pd.read_csv("item_interactions.csv")  # Ensure columns: 'user_id', 'item_id', 'rating', 'item_features'
+
+# Collaborative Filtering – Building User Profiles (Averaging ratings per user)
+collaborative_profile = data.pivot_table(index='user_id', columns='item_id', values='rating').fillna(0)
+
+# Content-Based Learning – Building User Profiles
+if 'item_features' in data.columns:
+    content_features = data.groupby('user_id')['item_features'].apply(lambda x: ' '.join(x)).reset_index()
+    content_vectorizer = TfidfVectorizer(stop_words='english')
+    content_matrix = content_vectorizer.fit_transform(content_features['item_features'])
+    content_profile = pd.DataFrame(content_matrix.toarray(), columns=content_vectorizer.get_feature_names_out())
+else:
+    print("Warning: 'item_features' column not found. Content-based filtering is skipped.")
+    content_profile = pd.DataFrame()
+
+# Hybrid User Profiles (Collaborative + Content-Based)
+hybrid_profile = pd.concat([collaborative_profile.reset_index(drop=True), content_profile], axis=1)
+
+# Dimensionality Reduction using PCA
+pca = PCA(n_components=10)
+reduced_collaborative = pca.fit_transform(collaborative_profile)
+reduced_hybrid = pca.fit_transform(hybrid_profile)
+
+# Function to evaluate user profiles
+def evaluate_profiles(actual_ratings, predicted_ratings):
+    rmse = mean_squared_error(actual_ratings, predicted_ratings, squared=False)
+    return rmse
+
+# Creating predicted ratings using PCA-transformed profiles
+predicted_ratings_collaborative = reduced_collaborative @ reduced_collaborative.T
+predicted_ratings_hybrid = reduced_hybrid @ reduced_hybrid.T
+
+# Evaluating User Profiles
+rmse_collaborative = evaluate_profiles(collaborative_profile.values, predicted_ratings_collaborative)
+rmse_hybrid = evaluate_profiles(collaborative_profile.values, predicted_ratings_hybrid)
+
+print(f"RMSE (Collaborative Profile): {rmse_collaborative}")
+print(f"RMSE (Hybrid Profile): {rmse_hybrid}")
+
+
+dont add any changes, keep it simple, my sample dataset:
+
+user_id,item_id,rating,interaction,timestamp,description,item_features
+user_78,item_17,4.0,cart,2025-05-09 04:31:25,Run turn church ahead heavy two produce miss cup decade.,Electronics no
+
+
+make my code work
