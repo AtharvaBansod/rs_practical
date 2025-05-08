@@ -1,0 +1,50 @@
+Top 5 Similar Movies for Each Movie:
+
+Avatar:
+title
+Superman Returns              1.0
+Man of Steel                  1.0
+X-Men: Days of Future Past    1.0
+Jupiter Ascending             1.0
+The Wolverine                 1.0
+Name: Avatar, dtype: float64     
+
+Pirates of the Caribbean: At World's End:
+title
+Spider-Man 3                                   1.0
+Batman v Superman: Dawn of Justice             1.0
+Pirates of the Caribbean: Dead Man's Chest     1.0
+Pirates of the Caribbean: On Stranger Tides    1.0
+The Hobbit: The Battle of the Five Armies      1.0
+Name: Pirates of the Caribbean: At World's End, dtype: float64
+
+Spectre:
+title
+The Art of War      1.000
+Speed               1.000
+Kick-Ass 2          1.000
+Gridiron Gang       0.939
+Reno 911!: Miami    0.919
+Name: Spectre, dtype: float64
+
+The Dark Knight Rises:
+title
+The Dark Knight                          1.0
+The Fast and the Furious: Tokyo Drift    1.0
+The Siege                                1.0
+Need for Speed                           1.0
+Man on Fire                              1.0
+title
+Avengers: Age of Ultron                1.0
+The Avengers                           1.0
+Captain America: Civil War             1.0
+Iron Man 3                             1.0
+Transformers: Revenge of the Fallen    1.0
+Name: John Carter, dtype: float64
+
+Top 5 Recommended Movies from the Most Watched Genre:
+The Dark Knight
+The Fast and the Furious: Tokyo Drift
+The Siege
+Need for Speed
+Man on Fire

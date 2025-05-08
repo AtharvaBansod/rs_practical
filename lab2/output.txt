@@ -1,0 +1,6 @@
+Using movie: Cars 2
+
+Recommendations for 'Cars 2':
+Content-Based: ['Cars', 'Toy Story 2', 'Toy Story', 'Jimmy Neutron: Boy Genius', 'The Ant Bully']
+Collaborative Filtering: ['Under the Skin', 'Happy Feet', 'Percy Jackson: Sea of Monsters', 'Sucker Punch', 'Alien: Resurrection']
+Hybrid: ['Jimmy Neutron: Boy Genius', 'Happy Feet', 'Percy Jackson: Sea of Monsters', 'Toy Story 2', 'The Ant Bully']
