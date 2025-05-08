@@ -1,1 +1,17 @@
-Output:\n
+Processed Dataset (First 15 Rows):
+                                         title  genres  original_language  popularity  vote_average  vote_count  director
+0                                       Avatar      59                  7    0.171815          0.72    0.858057       887
+1     Pirates of the Caribbean: At World's End     327                  7    0.158846          0.69    0.327225       771
+2                                      Spectre      29                  7    0.122635          0.63    0.324753      1971
+3                        The Dark Knight Rises     130                  7    0.128272          0.76    0.662158       361
+4                                  John Carter      71                  7    0.050169          0.61    0.154450        96
+5                                 Spider-Man 3     805                  7    0.132141          0.59    0.260035      1974
+6                                      Tangled     396                  7    0.055600          0.74    0.242147       272
+7                      Avengers: Age of Ultron      71                  7    0.153360          0.73    0.492074      1180
+8       Harry Potter and the Half-Blood Prince     348                  7    0.112937          0.74    0.384889       532
+9           Batman v Superman: Dawn of Justice      56                  7    0.177928          0.57    0.509308      2338
+10                            Superman Returns     333                  7    0.066157          0.54    0.101803       270
+11                           Quantum of Solace     245                  7    0.123265          0.61    0.215605      1385
+12  Pirates of the Caribbean: Dead Man's Chest     327                  7    0.166572          0.70    0.381472       771
+13                             The Lone Ranger      81                  7    0.056016          0.59    0.168048       771
+14                                Man of Steel      59                  7    0.113522          0.65    0.462405      2338
