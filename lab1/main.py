@@ -1,3 +1,8 @@
+# Analyze the functions of a recommender system using a
+# real-world dataset (e.g., movie or product
+# recommendations).
+
+
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
