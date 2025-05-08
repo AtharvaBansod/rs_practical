@@ -1,3 +1,8 @@
+# Conduct offline experiments to test recommendation
+# algorithms using historical data.
+
+
+
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
