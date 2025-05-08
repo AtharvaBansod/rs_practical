@@ -1,6 +1,5 @@
-# This is main.py for lab10
-# Experiment No.: 10
-# Program Code (Simulated User Study Evaluation)
+# Design and execute user studies to evaluate user
+# satisfaction with recommendations.
 
 import random
 import pandas as pd
