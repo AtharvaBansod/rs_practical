@@ -1,1 +1,4 @@
-Output:\n
+Output:
+Average Recommendation Satisfaction: 4.00
+Average Relevance Rating: 3.00
+Average Usability Rating: 4.20
