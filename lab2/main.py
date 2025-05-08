@@ -1,3 +1,8 @@
+# Compare different recommendation techniques
+# (content-based, collaborative filtering, hybrid).
+
+
+
 # This is main.py for lab2
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
