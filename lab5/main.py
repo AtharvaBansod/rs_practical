@@ -1,3 +1,8 @@
+# Apply support vector machines (SVMs) and neural
+# networks for classification in recommender systems.
+
+
+
 import pandas as pd
 from sklearn.svm import SVC
 from sklearn.neural_network import MLPClassifier
