@@ -1,1 +1,86 @@
-# This is prompt.txt for lab9
+
+Conduct offline experiments to test recommendation
+algorithms using historical data.
+
+# Experiment No.: 9
+# Program Code (Offline Evaluation of Recommendation Algorithms)
+
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error, precision_score, recall_score
+from sklearn.neighbors import NearestNeighbors
+
+# Load dataset (ensure columns: 'user_id', 'item_id', 'rating' exist)
+data = pd.read_csv("user_item_interactions.csv")
+
+# Split data into training (80%) and testing (20%) sets
+train_data, test_data = train_test_split(data, test_size=0.2, random_state=42)
+
+# Create user-item matrix for collaborative filtering
+train_matrix = train_data.pivot_table(index='user_id', columns='item_id', values='rating').fillna(0)
+
+# Fit a Nearest Neighbors model for finding similar users
+model = NearestNeighbors(n_neighbors=5, metric='cosine', algorithm='brute')
+model.fit(train_matrix)
+
+# Function to make predictions
+def make_predictions(user_id, item_id):
+    if user_id not in train_matrix.index or item_id not in train_matrix.columns:
+        return np.nan  # If user or item is missing, return NaN
+
+    # Find the nearest users
+    distances, indices = model.kneighbors(train_matrix.loc[user_id].values.reshape(1, -1), n_neighbors=5)
+    
+    # Extract ratings from similar users
+    similar_users = train_matrix.iloc[indices.flatten()]
+    
+    if item_id in train_matrix.columns:
+        predicted_rating = similar_users[item_id].mean()  # Predict rating using neighbors' average
+        return predicted_rating
+    else:
+        return np.nan
+
+# Function to evaluate the model using RMSE, Precision, and Recall
+def evaluate_model():
+    predicted_ratings = []
+    actual_ratings = []
+    
+    for _, row in test_data.iterrows():
+        user_id = row['user_id']
+        item_id = row['item_id']
+        actual_rating = row['rating']
+        predicted_rating = make_predictions(user_id, item_id)
+        
+        if not np.isnan(predicted_rating):  # Ignore NaN predictions
+            actual_ratings.append(actual_rating)
+            predicted_ratings.append(round(predicted_rating))  # Convert to integer
+
+    # Compute RMSE
+    rmse = mean_squared_error(actual_ratings, predicted_ratings, squared=False)
+
+    # Convert ratings to binary format (for precision and recall)
+    actual_binary = [1 if rating >= 4 else 0 for rating in actual_ratings]
+    predicted_binary = [1 if rating >= 4 else 0 for rating in predicted_ratings]
+
+    # Calculate Precision and Recall
+    precision = precision_score(actual_binary, predicted_binary, zero_division=1)
+    recall = recall_score(actual_binary, predicted_binary, zero_division=1)
+    
+    return rmse, precision, recall
+
+# Run evaluation
+rmse, precision, recall = evaluate_model()
+print(f"RMSE: {rmse:.4f}")
+print(f"Precision: {precision:.4f}")
+print(f"Recall: {recall:.4f}")
+
+
+
+dont add any changes, keep it simple, my sample dataset:
+
+user_id,item_id,rating,interaction,timestamp,description,item_features
+user_78,item_17,4.0,cart,2025-05-09 04:31:25,Run turn church ahead heavy two produce miss cup decade.,Electronics no
+
+
+make my code work
