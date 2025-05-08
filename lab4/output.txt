@@ -1,1 +1,87 @@
-Output:\n
+Output:
+Dataset shape: (4801, 6)
+Success distribution:    
+success
+0    3802
+1     999
+Name: count, dtype: int64
+Success rate: 0.21       
+
+KNN Classifier:
+              precision    recall  f1-score   support
+
+           0       0.93      0.95      0.94       769
+           1       0.77      0.71      0.74       192
+
+    accuracy                           0.90       961
+   macro avg       0.85      0.83      0.84       961
+weighted avg       0.90      0.90      0.90       961
+
+
+Decision Tree Classifier:
+              precision    recall  f1-score   support
+
+           0       0.96      0.94      0.95       769
+           1       0.79      0.86      0.82       192
+
+    accuracy                           0.93       961
+   macro avg       0.88      0.90      0.89       961
+weighted avg       0.93      0.93      0.93       961
+
+
+Rule-Based Classifier:
+              precision    recall  f1-score   support
+
+           0       0.94      0.98      0.96       769
+           1       0.92      0.73      0.82       192
+
+    accuracy                           0.93       961
+   macro avg       0.93      0.86      0.89       961
+weighted avg       0.93      0.93      0.93       961
+
+
+Random Forest Classifier:
+              precision    recall  f1-score   support
+
+           0       0.97      0.96      0.97       769
+           1       0.86      0.86      0.86       192
+
+    accuracy                           0.94       961
+   macro avg       0.91      0.91      0.91       961
+weighted avg       0.94      0.94      0.94       961
+
+
+Cross-validation mean accuracy:
+KNN: 0.9018
+Decision Tree: 0.9221
+Rule-based: 0.9302
+Random Forest: 0.9409
+
+Rule-Based Classifier Decision Rules:
+|--- vote_average <= 0.38
+|   |--- class: 0
+|--- vote_average >  0.38
+|   |--- popularity <= -0.17
+|   |   |--- budget <= -0.52
+|   |   |   |--- class: 0
+|   |   |--- budget >  -0.52
+|   |   |   |--- class: 0
+|   |--- popularity >  -0.17
+|   |   |--- budget <= -0.53
+|   |   |   |--- class: 0
+|   |   |--- budget >  -0.53
+|   |   |   |--- class: 1
+
+
+Feature Importance (Random Forest):
+        Feature  Importance
+2  vote_average    0.455025
+3    vote_count    0.174447
+1    popularity    0.168367
+0        budget    0.108546
+4       runtime    0.093615
+
+Example Movie Prediction:
+Features: {'budget': 150000000, 'popularity': 100, 'vote_average': 7.5, 'vote_count': 1000, 'runtime': 120}
+Prediction: Hit
+Success Probability: 0.91
